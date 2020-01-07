@@ -68,6 +68,10 @@ class _HomeState extends State<Home> {
         throw HttpException('User not Found');
       }
 
+      if (response.statusCode != 200) {
+        throw HttpException('Error. Try Again Later');
+      }
+
       return User.fromJson(json.decode(response.body));
   }
 
@@ -121,28 +125,31 @@ class _HomeState extends State<Home> {
                        ListView.builder(
                          itemCount: users.length,
                          itemBuilder: (context, index) {
-                           return Card(
-                               margin: EdgeInsets.only(bottom: 20),
-                               child: Container(
-                                   padding: EdgeInsets.all(16),
-                                   child: Column(
-                                     children: <Widget>[
-                                       Container(
-                                         width: 100,
-                                         height: 100,
-                                         margin: EdgeInsets.all(16),
-                                         decoration: BoxDecoration(
-                                           image: DecorationImage(
-                                               image: NetworkImage(users[index].avatarUrl)
+                           return Container(
+                             margin: EdgeInsets.only(bottom: 20),
+                               //TODO - Add InkWall
+                               child: Card(
+                                   child: Container(
+                                     padding: EdgeInsets.all(16),
+                                     child: Column(
+                                       children: <Widget>[
+                                         Container(
+                                           width: 100,
+                                           height: 100,
+                                           margin: EdgeInsets.all(16),
+                                           decoration: BoxDecoration(
+                                             image: DecorationImage(
+                                                 image: NetworkImage(users[index].avatarUrl)
+                                             ),
+                                             borderRadius: BorderRadius.all(Radius.circular(50)),
                                            ),
-                                           borderRadius: BorderRadius.all(Radius.circular(50)),
                                          ),
-                                       ),
-                                       Text(users[index].name, style: TextStyle(fontWeight: FontWeight.bold)),
-                                       Text(users[index].bio, style: TextStyle(color: Colors.grey)),
-                                     ],
-                                   )
-                               )
+                                         Text(users[index].name, style: TextStyle(fontWeight: FontWeight.bold)),
+                                         Text(users[index].bio, style: TextStyle(color: Colors.grey)),
+                                       ],
+                                     ),
+                                   ),
+                               ),
                            );
                          },
                        )
