@@ -1,0 +1,99 @@
+import 'package:flutter/material.dart';
+
+import 'package:github_viewer/models/star.dart';
+import 'package:github_viewer/models/user.dart';
+import '../repositories/fetch_stars.dart';
+import '../widgets/stars_list.dart';
+
+class UserDetail extends StatefulWidget {
+  final User user;
+  UserDetail({Key key, @required this.user}) : super(key: key);
+
+  @override
+  _UserDetailState createState() => _UserDetailState();
+}
+
+class _UserDetailState extends State<UserDetail> {
+  User user;
+  Future<List<Star>> initialStars;
+  int page = 1;
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    user = widget.user;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(user.name),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(25),
+        child: Column(
+          children: <Widget>[
+            Container(
+              child: Column(
+                children: <Widget>[
+                  Center(
+                    child: Container(
+                        width: 100,
+                        height: 100,
+                        margin: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(user.avatarUrl),
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                        ),
+                      )
+                  ),
+                  Container(
+                    child: Text(user.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 5),
+                    child: Text(user.bio, style: TextStyle(fontSize: 14, color: Colors.grey)),
+                  )
+                ],
+              ),
+            ),
+
+            Container(
+             child: Divider(),
+              margin: EdgeInsets.symmetric(vertical: 10),
+            ),
+
+            Expanded(
+              child: Container(
+                child: FutureBuilder(
+                  future: fetchStars(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      return StarList(initialStars: snapshot.data);
+                    }
+
+                    if (snapshot.hasError) {
+                      return Center(
+                          child: Text('ERRO!', style: TextStyle(color: Colors.red)),
+                      );
+                    }
+
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                )
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+

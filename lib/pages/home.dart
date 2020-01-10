@@ -1,7 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:github_viewer/pages/user_detail.dart';
 import 'dart:convert';
 import 'dart:async';
 
@@ -62,7 +62,8 @@ class _HomeState extends State<Home> {
   }
 
   Future<User> fetchUser(String user) async {
-      final http.Response response = await http.get('https://api.github.com/users/$user');
+//      final http.Response response = await http.get('https://api.github.com/users/$user');
+      final http.Response response = await http.get('http://192.168.0.103:3000/users/1');
 
       if (response.statusCode == 404) {
         throw HttpException('User not Found');
@@ -127,8 +128,13 @@ class _HomeState extends State<Home> {
                          itemBuilder: (context, index) {
                            return Container(
                              margin: EdgeInsets.only(bottom: 20),
-                               //TODO - Add InkWall
                                child: Card(
+                                 child: InkWell(
+                                   onTap: () {
+                                     Navigator.push(context,
+                                         MaterialPageRoute(builder: (context) => UserDetail(user: users[index]))
+                                     );
+                                   },
                                    child: Container(
                                      padding: EdgeInsets.all(16),
                                      child: Column(
@@ -149,6 +155,7 @@ class _HomeState extends State<Home> {
                                        ],
                                      ),
                                    ),
+                                 ),
                                ),
                            );
                          },
