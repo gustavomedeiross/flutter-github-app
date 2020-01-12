@@ -71,10 +71,10 @@ class _UserDetailState extends State<UserDetail> {
             Expanded(
               child: Container(
                 child: FutureBuilder(
-                  future: fetchStars(),
+                  future: fetchStars(user: user),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
-                      return StarList(initialStars: snapshot.data);
+                      return StarList(initialStars: snapshot.data, user: user);
                     }
 
                     if (snapshot.hasError) {

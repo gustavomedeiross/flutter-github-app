@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:github_viewer/models/user.dart';
 import '../repositories/fetch_stars.dart';
 import 'package:github_viewer/models/star.dart';
 
 class StarList extends StatefulWidget {
   final List<Star> initialStars;
+  final User user;
 
-  StarList({this.initialStars});
+  StarList({this.initialStars, this.user});
 
   @override
   _StarListState createState() => _StarListState();
@@ -40,7 +42,7 @@ class _StarListState extends State<StarList> {
   Future<List<Star>> _fetchMoreStars() async {
     setState(() => isLoading = true);
 
-    final response = await fetchStars(page: page);
+    final response = await fetchStars(user: widget.user, page: page);
 
     print ('length: ${response.length}');
 
@@ -73,9 +75,12 @@ class _StarListState extends State<StarList> {
         controller: _scrollController,
         itemCount: isLoading ? (stars.length + 1) : stars.length,
         itemBuilder: (context, index) {
-          if (isLoading && index == (stars.length - 1)) {
+          if (isLoading && index == stars.length) {
             return Container(
-              child: CircularProgressIndicator(),
+              padding: EdgeInsets.all(10),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
           }
 
