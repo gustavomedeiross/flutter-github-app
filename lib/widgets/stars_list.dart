@@ -21,9 +21,7 @@ class _StarListState extends State<StarList> {
   ScrollController _scrollController = ScrollController();
 
   void _addScrollListener() {
-    _scrollController.addListener(() {
-      handleInfiniteScroll();
-    });
+    _scrollController.addListener(handleInfiniteScroll);
   }
 
   void handleInfiniteScroll() async {
@@ -34,7 +32,7 @@ class _StarListState extends State<StarList> {
       final lastStars = await _fetchMoreStars();
 
       if (lastStars.length == 0) {
-        _scrollController.dispose();
+        _scrollController.removeListener(handleInfiniteScroll);
       }
     }
   }
@@ -52,7 +50,7 @@ class _StarListState extends State<StarList> {
 
     setState(() => isLoading = false);
 
-    return stars;
+    return response;
   }
 
   @override

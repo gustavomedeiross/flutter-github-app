@@ -1,0 +1,564 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Gustavo Mendes de Medeiros",
+      "login": "mendes13",
+      "bio": "Minha biography muito massa é nois",
+      "avatar_url": "https://api.adorable.io/avatars/285/mendes13@adorable.png"
+    }
+  ],
+
+  "stars": [
+    {
+      "id": 1,
+      "name": "commodo labore",
+      "owner": {
+        "id": 1,
+        "name": "Hazel Oliver",
+        "login": "in",
+        "bio": "Elit exercitation officia id dolore dolor excepteur non nostrud amet.",
+        "avatar_url": "https://api.adorable.io/avatars/285/enim@adorable.png"
+      }
+    },
+    {
+      "id": 2,
+      "name": "id reprehenderit",
+      "owner": {
+        "id": 2,
+        "name": "Hyde Nieves",
+        "login": "anim",
+        "bio": "Culpa veniam magna sint pariatur minim.",
+        "avatar_url": "https://api.adorable.io/avatars/285/elit@adorable.png"
+      }
+    },
+    {
+      "id": 3,
+      "name": "proident reprehenderit",
+      "owner": {
+        "id": 3,
+        "name": "Wynn Mccoy",
+        "login": "velit",
+        "bio": "Do Lorem pariatur irure cillum do ullamco cupidatat.",
+        "avatar_url": "https://api.adorable.io/avatars/285/consequat@adorable.png"
+      }
+    },
+    {
+      "id": 4,
+      "name": "mollit commodo",
+      "owner": {
+        "id": 4,
+        "name": "Robbins Langley",
+        "login": "sint",
+        "bio": "Minim aliquip cupidatat ea commodo ad enim in excepteur fugiat.",
+        "avatar_url": "https://api.adorable.io/avatars/285/officia@adorable.png"
+      }
+    },
+    {
+      "id": 5,
+      "name": "elit mollit",
+      "owner": {
+        "id": 5,
+        "name": "Lara Mccarthy",
+        "login": "eu",
+        "bio": "Voluptate mollit officia deserunt aliqua.",
+        "avatar_url": "https://api.adorable.io/avatars/285/nulla@adorable.png"
+      }
+    },
+    {
+      "id": 6,
+      "name": "cupidatat do",
+      "owner": {
+        "id": 6,
+        "name": "Petersen Leonard",
+        "login": "pariatur",
+        "bio": "Non commodo amet ex dolor et ex anim labore non aute ea cupidatat.",
+        "avatar_url": "https://api.adorable.io/avatars/285/cupidatat@adorable.png"
+      }
+    },
+    {
+      "id": 7,
+      "name": "occaecat sunt",
+      "owner": {
+        "id": 7,
+        "name": "Hayden Wilkins",
+        "login": "ex",
+        "bio": "Deserunt eu aliquip velit do aliqua cupidatat.",
+        "avatar_url": "https://api.adorable.io/avatars/285/esse@adorable.png"
+      }
+    },
+    {
+      "id": 8,
+      "name": "cillum ipsum",
+      "owner": {
+        "id": 8,
+        "name": "Lynette Walsh",
+        "login": "ipsum",
+        "bio": "Est pariatur esse officia labore officia pariatur.",
+        "avatar_url": "https://api.adorable.io/avatars/285/duis@adorable.png"
+      }
+    },
+    {
+      "id": 9,
+      "name": "mollit officia",
+      "owner": {
+        "id": 9,
+        "name": "Earnestine Knowles",
+        "login": "enim",
+        "bio": "Ut officia ea ut cupidatat in id anim anim do ut ut cupidatat.",
+        "avatar_url": "https://api.adorable.io/avatars/285/laboris@adorable.png"
+      }
+    },
+    {
+      "id": 10,
+      "name": "labore elit",
+      "owner": {
+        "id": 10,
+        "name": "Nettie Riggs",
+        "login": "excepteur",
+        "bio": "Cillum culpa aliquip pariatur est adipisicing do.",
+        "avatar_url": "https://api.adorable.io/avatars/285/nostrud@adorable.png"
+      }
+    },
+    {
+      "id": 11,
+      "name": "amet fugiat",
+      "owner": {
+        "id": 11,
+        "name": "Noelle Stanton",
+        "login": "Lorem",
+        "bio": "Dolor nulla cupidatat sunt qui ad nostrud do mollit.",
+        "avatar_url": "https://api.adorable.io/avatars/285/non@adorable.png"
+      }
+    },
+    {
+      "id": 12,
+      "name": "commodo duis",
+      "owner": {
+        "id": 12,
+        "name": "Jaime Bolton",
+        "login": "amet",
+        "bio": "Velit nisi fugiat duis nisi cillum.",
+        "avatar_url": "https://api.adorable.io/avatars/285/ullamco@adorable.png"
+      }
+    },
+    {
+      "id": 13,
+      "name": "commodo enim",
+      "owner": {
+        "id": 13,
+        "name": "Gilmore Stark",
+        "login": "non",
+        "bio": "Veniam sit fugiat eiusmod qui quis irure ea do id consequat duis.",
+        "avatar_url": "https://api.adorable.io/avatars/285/proident@adorable.png"
+      }
+    },
+    {
+      "id": 14,
+      "name": "tempor consectetur",
+      "owner": {
+        "id": 14,
+        "name": "Edna Johnson",
+        "login": "ut",
+        "bio": "Cupidatat aliqua aliquip velit adipisicing et dolor ea et occaecat pariatur occaecat incididunt.",
+        "avatar_url": "https://api.adorable.io/avatars/285/aliqua@adorable.png"
+      }
+    },
+    {
+      "id": 15,
+      "name": "voluptate elit",
+      "owner": {
+        "id": 15,
+        "name": "Dixon Curry",
+        "login": "consectetur",
+        "bio": "Eiusmod consequat duis proident esse exercitation dolor esse cillum occaecat aliquip.",
+        "avatar_url": "https://api.adorable.io/avatars/285/minim@adorable.png"
+      }
+    },
+    {
+      "id": 16,
+      "name": "reprehenderit et",
+      "owner": {
+        "id": 16,
+        "name": "Rowena Nelson",
+        "login": "ullamco",
+        "bio": "Officia minim anim dolore consequat duis duis.",
+        "avatar_url": "https://api.adorable.io/avatars/285/minim@adorable.png"
+      }
+    },
+    {
+      "id": 17,
+      "name": "amet fugiat",
+      "owner": {
+        "id": 17,
+        "name": "Esperanza Pearson",
+        "login": "anim",
+        "bio": "Esse quis minim laboris qui adipisicing anim ipsum.",
+        "avatar_url": "https://api.adorable.io/avatars/285/mollit@adorable.png"
+      }
+    },
+    {
+      "id": 18,
+      "name": "mollit qui",
+      "owner": {
+        "id": 18,
+        "name": "Paulette Hoover",
+        "login": "exercitation",
+        "bio": "Qui officia et in deserunt duis ullamco.",
+        "avatar_url": "https://api.adorable.io/avatars/285/est@adorable.png"
+      }
+    },
+    {
+      "id": 19,
+      "name": "dolor elit",
+      "owner": {
+        "id": 19,
+        "name": "Flores Tran",
+        "login": "sit",
+        "bio": "Sit esse incididunt nisi magna.",
+        "avatar_url": "https://api.adorable.io/avatars/285/occaecat@adorable.png"
+      }
+    },
+    {
+      "id": 20,
+      "name": "Lorem eu",
+      "owner": {
+        "id": 20,
+        "name": "Alta Hurley",
+        "login": "laboris",
+        "bio": "Commodo qui nostrud nulla id cupidatat sunt commodo commodo veniam Lorem ea do.",
+        "avatar_url": "https://api.adorable.io/avatars/285/labore@adorable.png"
+      }
+    },
+    {
+      "id": 21,
+      "name": "excepteur veniam",
+      "owner": {
+        "id": 21,
+        "name": "Tamra Branch",
+        "login": "consectetur",
+        "bio": "Duis Lorem veniam consectetur ullamco adipisicing ullamco eiusmod ipsum cillum ex sit ut laboris.",
+        "avatar_url": "https://api.adorable.io/avatars/285/est@adorable.png"
+      }
+    },
+    {
+      "id": 22,
+      "name": "est non",
+      "owner": {
+        "id": 22,
+        "name": "Watkins Rodriguez",
+        "login": "velit",
+        "bio": "Pariatur nisi eiusmod ad excepteur laboris voluptate quis pariatur mollit aute amet.",
+        "avatar_url": "https://api.adorable.io/avatars/285/eu@adorable.png"
+      }
+    },
+    {
+      "id": 23,
+      "name": "minim velit",
+      "owner": {
+        "id": 23,
+        "name": "Jennifer Salas",
+        "login": "adipisicing",
+        "bio": "Ullamco ut anim sunt laboris.",
+        "avatar_url": "https://api.adorable.io/avatars/285/incididunt@adorable.png"
+      }
+    },
+    {
+      "id": 24,
+      "name": "tempor ipsum",
+      "owner": {
+        "id": 24,
+        "name": "Louise Black",
+        "login": "adipisicing",
+        "bio": "Ullamco veniam nostrud mollit incididunt aliquip eu excepteur tempor aute laboris.",
+        "avatar_url": "https://api.adorable.io/avatars/285/quis@adorable.png"
+      }
+    },
+    {
+      "id": 25,
+      "name": "esse voluptate",
+      "owner": {
+        "id": 25,
+        "name": "Edwina Howell",
+        "login": "exercitation",
+        "bio": "Magna adipisicing reprehenderit cupidatat qui reprehenderit excepteur sint officia laboris non officia nostrud.",
+        "avatar_url": "https://api.adorable.io/avatars/285/esse@adorable.png"
+      }
+    },
+    {
+      "id": 26,
+      "name": "eu in",
+      "owner": {
+        "id": 26,
+        "name": "Ladonna Pacheco",
+        "login": "occaecat",
+        "bio": "Esse pariatur labore sit sunt.",
+        "avatar_url": "https://api.adorable.io/avatars/285/labore@adorable.png"
+      }
+    },
+    {
+      "id": 27,
+      "name": "voluptate do",
+      "owner": {
+        "id": 27,
+        "name": "Sonya Berry",
+        "login": "reprehenderit",
+        "bio": "Duis ex et sint est consectetur culpa adipisicing id laborum fugiat nulla quis nisi sunt.",
+        "avatar_url": "https://api.adorable.io/avatars/285/officia@adorable.png"
+      }
+    },
+    {
+      "id": 28,
+      "name": "labore amet",
+      "owner": {
+        "id": 28,
+        "name": "Kerr Stout",
+        "login": "laborum",
+        "bio": "Consectetur id ea id labore quis.",
+        "avatar_url": "https://api.adorable.io/avatars/285/anim@adorable.png"
+      }
+    },
+    {
+      "id": 29,
+      "name": "tempor occaecat",
+      "owner": {
+        "id": 29,
+        "name": "Meghan Phelps",
+        "login": "et",
+        "bio": "Tempor est qui nisi officia et.",
+        "avatar_url": "https://api.adorable.io/avatars/285/irure@adorable.png"
+      }
+    },
+    {
+      "id": 30,
+      "name": "labore pariatur",
+      "owner": {
+        "id": 30,
+        "name": "Latasha Weiss",
+        "login": "cillum",
+        "bio": "Sunt nulla pariatur sint amet ad esse velit commodo pariatur sit occaecat velit.",
+        "avatar_url": "https://api.adorable.io/avatars/285/dolor@adorable.png"
+      }
+    },
+    {
+      "id": 31,
+      "name": "commodo elit",
+      "owner": {
+        "id": 31,
+        "name": "Penelope Rosario",
+        "login": "laborum",
+        "bio": "Tempor labore sit ad ex sunt excepteur proident dolor ut consequat.",
+        "avatar_url": "https://api.adorable.io/avatars/285/labore@adorable.png"
+      }
+    },
+    {
+      "id": 32,
+      "name": "eu labore",
+      "owner": {
+        "id": 32,
+        "name": "Marquita Robbins",
+        "login": "anim",
+        "bio": "Enim ipsum pariatur aliquip fugiat nulla elit nostrud anim.",
+        "avatar_url": "https://api.adorable.io/avatars/285/ut@adorable.png"
+      }
+    },
+    {
+      "id": 33,
+      "name": "qui id",
+      "owner": {
+        "id": 33,
+        "name": "Herring Curtis",
+        "login": "ipsum",
+        "bio": "Fugiat proident ex pariatur ad irure eiusmod laborum et est consectetur amet culpa Lorem.",
+        "avatar_url": "https://api.adorable.io/avatars/285/eu@adorable.png"
+      }
+    },
+    {
+      "id": 34,
+      "name": "qui proident",
+      "owner": {
+        "id": 34,
+        "name": "Bruce Dotson",
+        "login": "non",
+        "bio": "Laboris tempor ea officia aliquip eiusmod anim dolor cupidatat incididunt.",
+        "avatar_url": "https://api.adorable.io/avatars/285/dolor@adorable.png"
+      }
+    },
+    {
+      "id": 35,
+      "name": "ullamco nulla",
+      "owner": {
+        "id": 35,
+        "name": "Gray Lewis",
+        "login": "deserunt",
+        "bio": "In anim ad excepteur dolor officia laboris tempor laborum mollit.",
+        "avatar_url": "https://api.adorable.io/avatars/285/occaecat@adorable.png"
+      }
+    },
+    {
+      "id": 36,
+      "name": "sunt commodo",
+      "owner": {
+        "id": 36,
+        "name": "Diann Potts",
+        "login": "velit",
+        "bio": "Dolore eu nostrud proident nulla velit dolor fugiat sunt enim ad qui laboris.",
+        "avatar_url": "https://api.adorable.io/avatars/285/eiusmod@adorable.png"
+      }
+    },
+    {
+      "id": 37,
+      "name": "dolore enim",
+      "owner": {
+        "id": 37,
+        "name": "Anthony Fields",
+        "login": "magna",
+        "bio": "Adipisicing dolor sint excepteur officia ad duis eiusmod laborum irure Lorem occaecat incididunt.",
+        "avatar_url": "https://api.adorable.io/avatars/285/aliqua@adorable.png"
+      }
+    },
+    {
+      "id": 38,
+      "name": "adipisicing eiusmod",
+      "owner": {
+        "id": 38,
+        "name": "Moon Brown",
+        "login": "fugiat",
+        "bio": "Culpa velit quis sunt sunt.",
+        "avatar_url": "https://api.adorable.io/avatars/285/irure@adorable.png"
+      }
+    },
+    {
+      "id": 39,
+      "name": "fugiat labore",
+      "owner": {
+        "id": 39,
+        "name": "Freda Mcconnell",
+        "login": "sit",
+        "bio": "Eu elit do veniam in culpa id consectetur.",
+        "avatar_url": "https://api.adorable.io/avatars/285/Lorem@adorable.png"
+      }
+    },
+    {
+      "id": 40,
+      "name": "duis sit",
+      "owner": {
+        "id": 40,
+        "name": "Langley Lott",
+        "login": "eu",
+        "bio": "Ullamco adipisicing sunt laborum commodo ut enim non aliquip.",
+        "avatar_url": "https://api.adorable.io/avatars/285/nostrud@adorable.png"
+      }
+    },
+    {
+      "id": 41,
+      "name": "exercitation cupidatat",
+      "owner": {
+        "id": 41,
+        "name": "Robinson Potter",
+        "login": "do",
+        "bio": "Excepteur quis ipsum enim officia sunt Lorem.",
+        "avatar_url": "https://api.adorable.io/avatars/285/sunt@adorable.png"
+      }
+    },
+    {
+      "id": 42,
+      "name": "eu dolore",
+      "owner": {
+        "id": 42,
+        "name": "Sonia Huffman",
+        "login": "in",
+        "bio": "Minim qui consectetur consectetur qui elit ullamco minim proident nulla mollit.",
+        "avatar_url": "https://api.adorable.io/avatars/285/culpa@adorable.png"
+      }
+    },
+    {
+      "id": 43,
+      "name": "culpa sint",
+      "owner": {
+        "id": 43,
+        "name": "Georgia Clayton",
+        "login": "voluptate",
+        "bio": "Adipisicing mollit dolore id occaecat minim ipsum esse aute reprehenderit.",
+        "avatar_url": "https://api.adorable.io/avatars/285/dolore@adorable.png"
+      }
+    },
+    {
+      "id": 44,
+      "name": "ullamco nostrud",
+      "owner": {
+        "id": 44,
+        "name": "Bartlett Freeman",
+        "login": "amet",
+        "bio": "Dolore eiusmod ad sit laboris exercitation consequat officia est dolore commodo id est pariatur.",
+        "avatar_url": "https://api.adorable.io/avatars/285/magna@adorable.png"
+      }
+    },
+    {
+      "id": 45,
+      "name": "incididunt ut",
+      "owner": {
+        "id": 45,
+        "name": "Marcie Hewitt",
+        "login": "qui",
+        "bio": "Cillum in cillum et non consequat exercitation quis velit veniam nisi qui.",
+        "avatar_url": "https://api.adorable.io/avatars/285/ea@adorable.png"
+      }
+    },
+    {
+      "id": 46,
+      "name": "magna laboris",
+      "owner": {
+        "id": 46,
+        "name": "Marisol Newton",
+        "login": "magna",
+        "bio": "Voluptate occaecat aliqua aute laborum ut sunt ut velit occaecat deserunt.",
+        "avatar_url": "https://api.adorable.io/avatars/285/officia@adorable.png"
+      }
+    },
+    {
+      "id": 47,
+      "name": "aliqua adipisicing",
+      "owner": {
+        "id": 47,
+        "name": "Elsa Richardson",
+        "login": "anim",
+        "bio": "Amet consequat ea in duis laboris ullamco elit aliquip ea exercitation voluptate culpa esse labore.",
+        "avatar_url": "https://api.adorable.io/avatars/285/occaecat@adorable.png"
+      }
+    },
+    {
+      "id": 48,
+      "name": "mollit culpa",
+      "owner": {
+        "id": 48,
+        "name": "Curtis Nash",
+        "login": "ad",
+        "bio": "Sunt eu dolor do proident ad eiusmod id irure aute.",
+        "avatar_url": "https://api.adorable.io/avatars/285/in@adorable.png"
+      }
+    },
+    {
+      "id": 49,
+      "name": "sunt anim",
+      "owner": {
+        "id": 49,
+        "name": "Buchanan Duran",
+        "login": "minim",
+        "bio": "Sunt pariatur adipisicing proident commodo mollit consectetur.",
+        "avatar_url": "https://api.adorable.io/avatars/285/aute@adorable.png"
+      }
+    },
+    {
+      "id": 50,
+      "name": "voluptate nisi",
+      "owner": {
+        "id": 50,
+        "name": "Carpenter Patterson",
+        "login": "voluptate",
+        "bio": "Aliqua elit consequat deserunt veniam consectetur qui labore duis officia dolor.",
+        "avatar_url": "https://api.adorable.io/avatars/285/proident@adorable.png"
+      }
+    }
+  ]
+}

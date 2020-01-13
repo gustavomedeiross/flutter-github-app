@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+fake-json-api-github/node_modules
 
 # IntelliJ related
 *.iml

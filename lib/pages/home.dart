@@ -7,6 +7,7 @@ import 'dart:async';
 
 import '../models/user.dart';
 import '../exceptions/app_exception.dart';
+import '../services/api.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -63,7 +64,7 @@ class _HomeState extends State<Home> {
 
   Future<User> fetchUser(String user) async {
       final http.Response response = await http.get('https://api.github.com/users/$user');
-//      final http.Response response = await http.get('http://192.168.0.108:3000/users/1');
+//      final http.Response response = await http.get('$api/users/1');
 
       if (response.statusCode == 404) {
         throw HttpException('User not Found');

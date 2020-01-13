@@ -1,13 +1,14 @@
 import 'package:github_viewer/models/user.dart';
 import 'package:http/http.dart' as http;
+import 'package:github_viewer/models/star.dart';
 import 'dart:io';
 import 'dart:convert';
-import 'package:github_viewer/models/star.dart';
+
+import '../services/api.dart';
 
 Future<List<Star>> fetchStars({User user, int page = 1}) async {
   final http.Response response = await http.get('https://api.github.com/users/${user.login}/starred?page=$page');
-//  final url = 'http://192.168.0.108:3000/stars?_limit=5&_page=$page';
-//  print('url : ${url}');
+//  final url = '$api/stars?_limit=6&_page=$page';
 //  final http.Response response = await http.get(url);
 
   if (response.statusCode != 200) {
