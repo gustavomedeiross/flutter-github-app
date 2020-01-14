@@ -25,9 +25,10 @@ class _StarListState extends State<StarList> {
   }
 
   void handleInfiniteScroll() async {
-    final triggerFetchMoreSize = 0.9 * _scrollController.position.maxScrollExtent;
+    final triggerFetchMoreSize = _scrollController.position.maxScrollExtent;
 
-    if (_scrollController.position.pixels > triggerFetchMoreSize) {
+    if (_scrollController.position.pixels == triggerFetchMoreSize) {
+      print('---------> CHEGOU NOS 100% <------------');
       setState(() => page++);
       final lastStars = await _fetchMoreStars();
 
@@ -38,6 +39,7 @@ class _StarListState extends State<StarList> {
   }
 
   Future<List<Star>> _fetchMoreStars() async {
+    print('==================>> FETCHMORESTARS CHAMADO <<===================');
     setState(() => isLoading = true);
 
     final response = await fetchStars(user: widget.user, page: page);

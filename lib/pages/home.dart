@@ -63,8 +63,8 @@ class _HomeState extends State<Home> {
   }
 
   Future<User> fetchUser(String user) async {
-      final http.Response response = await http.get('https://api.github.com/users/$user');
-//      final http.Response response = await http.get('$api/users/1');
+//      final http.Response response = await http.get('https://api.github.com/users/$user');
+      final http.Response response = await http.get('$api/users/1');
 
       if (response.statusCode == 404) {
         throw HttpException('User not Found');

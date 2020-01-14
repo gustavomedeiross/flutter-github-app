@@ -7,9 +7,9 @@ import 'dart:convert';
 import '../services/api.dart';
 
 Future<List<Star>> fetchStars({User user, int page = 1}) async {
-  final http.Response response = await http.get('https://api.github.com/users/${user.login}/starred?page=$page');
-//  final url = '$api/stars?_limit=6&_page=$page';
-//  final http.Response response = await http.get(url);
+//  final http.Response response = await http.get('https://api.github.com/users/${user.login}/starred?page=$page');
+  final url = '$api/stars?_limit=6&_page=$page';
+  final http.Response response = await http.get(url);
 
   if (response.statusCode != 200) {
     throw HttpException('Error. Try Again Later');
