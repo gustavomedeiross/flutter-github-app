@@ -28,7 +28,6 @@ class _StarListState extends State<StarList> {
     final triggerFetchMoreSize = _scrollController.position.maxScrollExtent;
 
     if (_scrollController.position.pixels == triggerFetchMoreSize) {
-      print('---------> CHEGOU NOS 100% <------------');
       setState(() => page++);
       final lastStars = await _fetchMoreStars();
 
@@ -39,12 +38,9 @@ class _StarListState extends State<StarList> {
   }
 
   Future<List<Star>> _fetchMoreStars() async {
-    print('==================>> FETCHMORESTARS CHAMADO <<===================');
     setState(() => isLoading = true);
 
     final response = await fetchStars(user: widget.user, page: page);
-
-    print ('length: ${response.length}');
 
     setState(() {
       stars = stars + response;
@@ -73,13 +69,16 @@ class _StarListState extends State<StarList> {
     return Container(
       child: ListView.builder(
         controller: _scrollController,
-        itemCount: isLoading ? (stars.length + 1) : stars.length,
+        itemCount: stars.length + 1,
         itemBuilder: (context, index) {
-          if (isLoading && index == stars.length) {
-            return Container(
-              padding: EdgeInsets.all(10),
-              child: Center(
-                child: CircularProgressIndicator(),
+          if (index == stars.length) {
+            return Opacity(
+              opacity: isLoading ? 1 : 0,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
               ),
             );
           }
