@@ -89,36 +89,42 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             Container(
               margin: EdgeInsets.only(bottom: 25),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
+              child: Form(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextField(
                         controller: inputController,
+                        textInputAction: TextInputAction.send,
                         decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(vertical: 15),
                           errorText: error.length > 0 ? error : null,
+                          labelText: 'Username',
+                          helperText: ' ',
                         ),
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 15),
-                    decoration: BoxDecoration(
-                      color: Colors.deepPurple,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: FlatButton(
-                      child: loading ? Container(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(
+                    Container(
+                      margin: EdgeInsets.only(left: 15),
+                      decoration: BoxDecoration(
+                        color: Colors.deepPurple,
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                      ),
+                      child: FlatButton(
+                        child: loading ? Container(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
                             strokeWidth: 2,
                             valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                           ),
-                      ) : Icon(Icons.add, color: Colors.white),
-                      onPressed: handleSubmit,
+                        ) : Icon(Icons.add, color: Colors.white),
+                        onPressed: handleSubmit,
+                      ),
                     ),
-                  ),
-                ],
-              )
+                  ],
+                )
+              ),
             ),
              Expanded(
                child: Container(
