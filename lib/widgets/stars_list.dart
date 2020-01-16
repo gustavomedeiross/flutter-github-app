@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_viewer/models/user.dart';
+import 'package:github_viewer/pages/repository_detail.dart';
 import '../repositories/fetch_stars.dart';
 import 'package:github_viewer/models/star.dart';
 
@@ -51,6 +52,16 @@ class _StarListState extends State<StarList> {
     return response;
   }
 
+  Future handleRefresh() async {
+    setState(() {
+      stars = [];
+      page = 1;
+    });
+
+    final updatedStars = await fetchStars(user: widget.user, page: page);
+    setState(() => stars = updatedStars);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -67,43 +78,49 @@ class _StarListState extends State<StarList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ListView.builder(
-        controller: _scrollController,
-        itemCount: stars.length + 1,
-        itemBuilder: (context, index) {
-          if (index == stars.length) {
-            return Opacity(
-              opacity: isLoading ? 1 : 0,
+      child: RefreshIndicator(
+        onRefresh: handleRefresh,
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: stars.length + 1,
+          itemBuilder: (context, index) {
+            if (index == stars.length) {
+              return Opacity(
+                opacity: isLoading ? 1 : 0,
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              );
+            }
+
+            return Card(
               child: Container(
                 padding: EdgeInsets.all(10),
-                child: Center(
-                  child: CircularProgressIndicator(),
+                child: ListTile(
+                  onTap: () => Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => RepositoryDetail(repository: '${stars[index].owner.login}/${stars[index].name}')),
+                  ),
+                  leading: Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        image: DecorationImage(
+                          image: NetworkImage(stars[index].owner.avatarUrl),
+                        )
+                    ),
+                  ),
+                  title: Text(stars[index].name, style: TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: Text(stars[index].owner.login),
                 ),
               ),
             );
-          }
-
-          return Card(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: ListTile(
-                leading: Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      image: DecorationImage(
-                        image: NetworkImage(stars[index].owner.avatarUrl),
-                      )
-                  ),
-                ),
-                title: Text(stars[index].name, style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(stars[index].owner.login),
-              ),
-            ),
-          );
-        },
-      ),
+          },
+        ),
+      )
     );
   }
 }

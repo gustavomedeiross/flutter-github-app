@@ -137,43 +137,43 @@ class _HomeState extends State<Home> {
                child: Container(
                  margin: EdgeInsets.only(top: 20),
                   child: (users != null ? (
-                       ListView.builder(
-                         itemCount: users.length,
-                         itemBuilder: (context, index) {
-                           return Container(
-                             margin: EdgeInsets.only(bottom: 20),
-                               child: Card(
-                                 child: InkWell(
-                                   onTap: () {
-                                     Navigator.push(context,
-                                         MaterialPageRoute(builder: (context) => UserDetail(user: users[index]))
-                                     );
-                                   },
-                                   child: Container(
-                                     padding: EdgeInsets.all(16),
-                                     child: Column(
-                                       children: <Widget>[
-                                         Container(
-                                           width: 100,
-                                           height: 100,
-                                           margin: EdgeInsets.all(16),
-                                           decoration: BoxDecoration(
-                                             image: DecorationImage(
-                                                 image: NetworkImage(users[index].avatarUrl)
-                                             ),
-                                             borderRadius: BorderRadius.all(Radius.circular(50)),
+                     ListView.builder(
+                       itemCount: users.length,
+                       itemBuilder: (context, index) {
+                         return Container(
+                           margin: EdgeInsets.only(bottom: 20),
+                             child: Card(
+                               child: InkWell(
+                                 onTap: () {
+                                   Navigator.push(context,
+                                       MaterialPageRoute(builder: (context) => UserDetail(user: users[index]))
+                                   );
+                                 },
+                                 child: Container(
+                                   padding: EdgeInsets.all(16),
+                                   child: Column(
+                                     children: <Widget>[
+                                       Container(
+                                         width: 100,
+                                         height: 100,
+                                         margin: EdgeInsets.all(16),
+                                         decoration: BoxDecoration(
+                                           image: DecorationImage(
+                                               image: NetworkImage(users[index].avatarUrl)
                                            ),
+                                           borderRadius: BorderRadius.all(Radius.circular(50)),
                                          ),
-                                         Text(users[index].name, style: TextStyle(fontWeight: FontWeight.bold)),
-                                         Text(users[index].bio, style: TextStyle(color: Colors.grey)),
-                                       ],
-                                     ),
+                                       ),
+                                       Text(users[index].name, style: TextStyle(fontWeight: FontWeight.bold)),
+                                       Text(users[index].bio, style: TextStyle(color: Colors.grey)),
+                                     ],
                                    ),
                                  ),
                                ),
-                           );
-                         },
-                       )
+                             ),
+                         );
+                       },
+                     )
                    ) : Text('Write down some users!')),
                ),
             ),
