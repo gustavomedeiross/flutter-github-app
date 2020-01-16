@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
   String error = '';
   final inputController = TextEditingController();
 
-  void handleSubmit() async {
+  void _submit() async {
     setState(() {
       this.loading = true;
     });
@@ -89,41 +89,48 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             Container(
               margin: EdgeInsets.only(bottom: 25),
-              child: Form(
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: TextField(
-                        controller: inputController,
-                        textInputAction: TextInputAction.send,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 15),
-                          errorText: error.length > 0 ? error : null,
-                          labelText: 'Username',
-                          helperText: ' ',
-                        ),
-                      ),
-                    ),
+              child: TextFormField(
+                onChanged: (username) {
+                  if (error.length > 0)
+                    setState(() => error = '');
+                },
+                controller: inputController,
+                textInputAction: TextInputAction.done,
+                onFieldSubmitted: (username) {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  _submit();
+                },
+                decoration: InputDecoration(
+                  filled: true,
+                  errorText: error.length > 0 ? error : null,
+                  labelText: 'Username',
+                  helperText: ' ',
+                  suffixIcon: loading ? (
                     Container(
-                      margin: EdgeInsets.only(left: 15),
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      ),
-                      child: FlatButton(
-                        child: loading ? Container(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                          ),
-                        ) : Icon(Icons.add, color: Colors.white),
-                        onPressed: handleSubmit,
-                      ),
-                    ),
-                  ],
-                )
+                      width: 20,
+                      height: 20,
+                      padding: EdgeInsets.all(10),
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  ) : (
+                    error.length > 0 ? (
+                      IconButton(
+                        icon: Icon(Icons.cancel),
+                        color: Colors.red,
+                        onPressed: () {
+                          setState(() => error = '');
+                          inputController.clear();
+                        },
+                      )
+                    ) : IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        _submit();
+                      },
+                    )
+                  )
+                ),
               ),
             ),
              Expanded(
