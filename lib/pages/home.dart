@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:github_viewer/pages/user_detail.dart';
@@ -7,7 +8,6 @@ import 'dart:async';
 
 import '../models/user.dart';
 import '../exceptions/app_exception.dart';
-import '../services/api.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -142,40 +142,41 @@ class _HomeState extends State<Home> {
                        itemBuilder: (context, index) {
                          return Container(
                            margin: EdgeInsets.only(bottom: 20),
-                             child: Card(
-                               child: InkWell(
-                                 onTap: () {
-                                   Navigator.push(context,
-                                       MaterialPageRoute(builder: (context) => UserDetail(user: users[index]))
-                                   );
-                                 },
-                                 child: Container(
-                                   padding: EdgeInsets.all(16),
-                                   child: Column(
-                                     children: <Widget>[
-                                       Container(
-                                         width: 100,
-                                         height: 100,
-                                         margin: EdgeInsets.all(16),
-                                         decoration: BoxDecoration(
-                                           image: DecorationImage(
-                                               image: NetworkImage(users[index].avatarUrl)
-                                           ),
-                                           borderRadius: BorderRadius.all(Radius.circular(50)),
-                                         ),
-                                       ),
-                                       Text(users[index].name, style: TextStyle(fontWeight: FontWeight.bold)),
-                                       Text(users[index].bio, style: TextStyle(color: Colors.grey)),
-                                     ],
-                                   ),
-                                 ),
-                               ),
+                           child: LongPressDraggable<User>(
+                             data: users[index],
+                             onDragStarted: () => HapticFeedback.lightImpact(),
+                             feedback: Container(
+                               width: MediaQuery.of(context).size.width - 50,
+                               child: UserCard(user: users[index]),
                              ),
+//                              feedback: Center(
+//                                child: Container(
+//                                  width: 75,
+//                                  height: 75,
+//                                  decoration: BoxDecoration(
+//                                    borderRadius: BorderRadius.all(Radius.circular(50)),
+//                                    image: DecorationImage(
+//                                      image: NetworkImage(users[index].avatarUrl),
+//                                    )
+//                                  ),
+//                                ),
+//                              ),
+                             child: UserCard(user: users[index]),
+                           ),
                          );
                        },
                      )
                    ) : Text('Write down some users!')),
                ),
+            ),
+            DragTarget<User>(
+              onAccept: (draggedUser) => setState(() => users = users.where((user) => user.id != draggedUser.id).toList()),
+              builder: (BuildContext context, List incoming, List rejected) {
+                return Container(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Icon(Icons.delete, color: Colors.red, size: 35),
+                );
+              },
             ),
           ],
         ),
@@ -183,3 +184,46 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+
+class UserCard extends StatelessWidget {
+  final User user;
+
+  UserCard({@required this.user});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Card(
+        child: InkWell(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => UserDetail(user: user))
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  width: 100,
+                  height: 100,
+                  margin: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(user.avatarUrl)
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                ),
+                Text(user.name, style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(user.bio, style: TextStyle(color: Colors.grey), maxLines: 1),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
