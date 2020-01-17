@@ -85,72 +85,71 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         padding: EdgeInsets.all(25),
-        child: Column(
+        child: Stack(
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(bottom: 25),
-              child: TextFormField(
-                onChanged: (username) {
-                  if (error.length > 0)
-                    setState(() => error = '');
-                },
-                controller: inputController,
-                textInputAction: TextInputAction.done,
-                onFieldSubmitted: (username) {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                  _submit();
-                },
-                decoration: InputDecoration(
-                  filled: true,
-                  errorText: error.length > 0 ? error : null,
-                  labelText: 'Username',
-                  helperText: ' ',
-                  suffixIcon: loading ? (
-                    Container(
-                      width: 20,
-                      height: 20,
-                      padding: EdgeInsets.all(10),
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  ) : (
-                    error.length > 0 ? (
-                      IconButton(
-                        icon: Icon(Icons.cancel),
-                        color: Colors.red,
-                        onPressed: () {
-                          setState(() => error = '');
-                          inputController.clear();
-                        },
-                      )
-                    ) : IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: () {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        _submit();
-                      },
-                    )
-                  )
+            Column(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(bottom: 25),
+                  child: TextFormField(
+                    onChanged: (username) {
+                      if (error.length > 0)
+                        setState(() => error = '');
+                    },
+                    controller: inputController,
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (username) {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      _submit();
+                    },
+                    decoration: InputDecoration(
+                        filled: true,
+                        errorText: error.length > 0 ? error : null,
+                        labelText: 'Username',
+                        helperText: ' ',
+                        suffixIcon: loading ? (
+                            Container(
+                              width: 20,
+                              height: 20,
+                              padding: EdgeInsets.all(10),
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                        ) : (
+                            error.length > 0 ? (
+                                IconButton(
+                                  icon: Icon(Icons.cancel),
+                                  color: Colors.red,
+                                  onPressed: () {
+                                    setState(() => error = '');
+                                    inputController.clear();
+                                  },
+                                )
+                            ) : IconButton(
+                              icon: Icon(Icons.add),
+                              onPressed: () {
+                                FocusScope.of(context).requestFocus(FocusNode());
+                                _submit();
+                              },
+                            )
+                        )
+                    ),
+                  ),
                 ),
-              ),
-            ),
-             Expanded(
-               child: Container(
-                 margin: EdgeInsets.only(top: 20),
-                  child: (users != null ? (
-                     ListView.builder(
-                       itemCount: users.length,
-                       itemBuilder: (context, index) {
-                         return Container(
-                           margin: EdgeInsets.only(bottom: 20),
-                           child: LongPressDraggable<User>(
-                             data: users[index],
-                             onDragStarted: () => HapticFeedback.lightImpact(),
-                             feedback: Container(
-                               width: MediaQuery.of(context).size.width - 50,
-                               child: UserCard(user: users[index]),
-                             ),
-//                              feedback: Center(
-//                                child: Container(
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: (users != null ? (
+                        ListView.builder(
+                          itemCount: users.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.only(bottom: 20),
+//                           child: LongPressDraggable<User>(
+//                             feedback: Container(
+//                               width: MediaQuery.of(context).size.width - 50,
+//                               child: UserCard(user: users[index]),
+//                             ),
+//                                feedback: Container(
 //                                  width: 75,
 //                                  height: 75,
 //                                  decoration: BoxDecoration(
@@ -160,24 +159,36 @@ class _HomeState extends State<Home> {
 //                                    )
 //                                  ),
 //                                ),
-//                              ),
-                             child: UserCard(user: users[index]),
-                           ),
-                         );
-                       },
-                     )
-                   ) : Text('Write down some users!')),
-               ),
+                              child: UserCard(user: users[index]),
+//                           ),
+                            );
+                          },
+                        )
+                    ) : Text('Write down some users!')),
+                  ),
+                ),
+              ],
             ),
-            DragTarget<User>(
-              onAccept: (draggedUser) => setState(() => users = users.where((user) => user.id != draggedUser.id).toList()),
-              builder: (BuildContext context, List incoming, List rejected) {
-                return Container(
-                  padding: EdgeInsets.only(top: 10),
-                  child: Icon(Icons.delete, color: Colors.red, size: 35),
-                );
-              },
-            ),
+            Positioned(
+              bottom: 10,
+              left: 50,
+              right: 50,
+              child: DragTarget<User>(
+                onAccept: (draggedUser) => setState(() => users = users.where((user) => user.id != draggedUser.id).toList()),
+                builder: (BuildContext context, List incoming, List rejected) {
+                  return Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      shape: BoxShape.circle,
+                    ),
+//                  padding: EdgeInsets.only(top: 10),
+//                  child: Icon(Icons.delete, color: Colors.red, size: 35),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),
@@ -205,15 +216,29 @@ class UserCard extends StatelessWidget {
             padding: EdgeInsets.all(16),
             child: Column(
               children: <Widget>[
-                Container(
-                  width: 100,
-                  height: 100,
-                  margin: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(user.avatarUrl)
+                LongPressDraggable<User>(
+                  data: user,
+                  onDragStarted: () => HapticFeedback.lightImpact(),
+                  feedback: Container(
+                    width: 75,
+                    height: 75,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        image: DecorationImage(
+                          image: NetworkImage(user.avatarUrl),
+                        )
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    margin: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(user.avatarUrl)
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                    ),
                   ),
                 ),
                 Text(user.name, style: TextStyle(fontWeight: FontWeight.bold)),
