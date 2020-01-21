@@ -18,6 +18,7 @@ class _HomeState extends State<Home> {
   List<User> users = [];
   bool loading = false;
   String error = '';
+  List usersBeingDragged = [];
   final inputController = TextEditingController();
 
   void _submit() async {
@@ -60,6 +61,18 @@ class _HomeState extends State<Home> {
   void dispose() {
     super.dispose();
     inputController.dispose();
+  }
+
+  void handleUserDragStarted(user) {
+    setState(() => usersBeingDragged.add(user));
+    HapticFeedback.lightImpact();
+  }
+
+  void handleUserDragEnd(user) {
+    setState(() {
+      usersBeingDragged = usersBeingDragged.where((usr) => usr.id != user.id).toList();
+    });
+    HapticFeedback.lightImpact();
   }
 
   Future<User> fetchUser(String user) async {
@@ -144,23 +157,7 @@ class _HomeState extends State<Home> {
                           itemBuilder: (context, index) {
                             return Container(
                               margin: EdgeInsets.only(bottom: 20),
-//                           child: LongPressDraggable<User>(
-//                             feedback: Container(
-//                               width: MediaQuery.of(context).size.width - 50,
-//                               child: UserCard(user: users[index]),
-//                             ),
-//                                feedback: Container(
-//                                  width: 75,
-//                                  height: 75,
-//                                  decoration: BoxDecoration(
-//                                    borderRadius: BorderRadius.all(Radius.circular(50)),
-//                                    image: DecorationImage(
-//                                      image: NetworkImage(users[index].avatarUrl),
-//                                    )
-//                                  ),
-//                                ),
-                              child: UserCard(user: users[index]),
-//                           ),
+                              child: UserCard(user: users[index], handleDragStarted: handleUserDragStarted, handleDragEnd: handleUserDragEnd),
                             );
                           },
                         )
@@ -169,22 +166,25 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            Positioned(
-              bottom: 10,
-              left: 50,
-              right: 50,
+            AnimatedPositioned(
+              duration: Duration(milliseconds: 500),
+              curve: Curves.easeInOutBack,
+              bottom: usersBeingDragged.isEmpty ? -60 : 30,
+              left: 0,
+              right: 0,
               child: DragTarget<User>(
                 onAccept: (draggedUser) => setState(() => users = users.where((user) => user.id != draggedUser.id).toList()),
                 builder: (BuildContext context, List incoming, List rejected) {
-                  return Container(
-                    width: 60,
-                    height: 60,
+                  return AnimatedContainer(
+                    duration: Duration(milliseconds: 300),
+                    width: incoming.isEmpty ? 60 : 90,
+                    height: incoming.isEmpty ? 60 : 90,
+                    child: Icon(Icons.delete, color: Colors.grey),
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      color: Colors.white,
                       shape: BoxShape.circle,
+                      border: Border.all(color: Colors.grey),
                     ),
-//                  padding: EdgeInsets.only(top: 10),
-//                  child: Icon(Icons.delete, color: Colors.red, size: 35),
                   );
                 },
               ),
@@ -199,8 +199,10 @@ class _HomeState extends State<Home> {
 
 class UserCard extends StatelessWidget {
   final User user;
+  final Function handleDragStarted;
+  final Function handleDragEnd;
 
-  UserCard({@required this.user});
+  UserCard({@required this.user, this.handleDragStarted, this.handleDragEnd});
 
   @override
   Widget build(BuildContext context) {
@@ -218,7 +220,8 @@ class UserCard extends StatelessWidget {
               children: <Widget>[
                 LongPressDraggable<User>(
                   data: user,
-                  onDragStarted: () => HapticFeedback.lightImpact(),
+                  onDragStarted: () => handleDragStarted(user),
+                  onDragEnd: (_) => handleDragEnd(user),
                   feedback: Container(
                     width: 75,
                     height: 75,
