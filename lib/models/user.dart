@@ -16,4 +16,14 @@ class User {
       avatarUrl: json['avatar_url'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': this.id,
+      'login': this.login,
+      'name': this.name,
+      'bio': this.bio,
+      'avatar_url': this.avatarUrl,
+    };
+  }
 }

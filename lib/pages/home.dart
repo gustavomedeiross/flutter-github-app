@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:github_viewer/pages/user_detail.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'dart:async';
 
@@ -15,6 +16,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  SharedPreferences _sharedPreferences;
   List<User> users = [];
   bool loading = false;
   String error = '';
@@ -42,6 +44,8 @@ class _HomeState extends State<Home> {
         error = '';
       });
 
+      _setUsersOnSharedPreferences(users);
+
       inputController.clear();
 
     } on AppException catch(err) {
@@ -55,6 +59,30 @@ class _HomeState extends State<Home> {
     setState(() {
       this.loading = false;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUsersFromSharedPreferences();
+  }
+
+  void _setUsersOnSharedPreferences(List<User> users) {
+    _sharedPreferences.setStringList('users', users.map((user) => json.encode(user.toJson())).toList());
+  }
+
+  void _getUsersFromSharedPreferences() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+
+    final List usersJson = _sharedPreferences.getStringList('users');
+
+    if (usersJson != null) {
+      final List users = usersJson.map((user) => User.fromJson(json.decode(user))).toList();
+
+      setState(() {
+        this.users = users;
+      });
+    }
   }
 
   @override
@@ -77,7 +105,6 @@ class _HomeState extends State<Home> {
 
   Future<User> fetchUser(String user) async {
       final http.Response response = await http.get('https://api.github.com/users/$user');
-//      final http.Response response = await http.get('$api/users/1');
 
       if (response.statusCode == 404) {
         throw HttpException('User not Found');
@@ -173,7 +200,10 @@ class _HomeState extends State<Home> {
               left: 0,
               right: 0,
               child: DragTarget<User>(
-                onAccept: (draggedUser) => setState(() => users = users.where((user) => user.id != draggedUser.id).toList()),
+                onAccept: (draggedUser) {
+                  setState(() => users = users.where((user) => user.id != draggedUser.id).toList());
+                  _setUsersOnSharedPreferences(users);
+                },
                 builder: (BuildContext context, List incoming, List rejected) {
                   return AnimatedContainer(
                     duration: Duration(milliseconds: 300),
@@ -203,6 +233,15 @@ class UserCard extends StatelessWidget {
   final Function handleDragEnd;
 
   UserCard({@required this.user, this.handleDragStarted, this.handleDragEnd});
+
+  Widget _buildCardBio(String bio) {
+    if (bio != null && bio.length > 0) {
+      return Text(bio, style: TextStyle(color: Colors.grey), maxLines: 1);
+    }
+
+    return Text('Bio not provided', style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic), maxLines: 1);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -245,7 +284,7 @@ class UserCard extends StatelessWidget {
                   ),
                 ),
                 Text(user.name, style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(user.bio, style: TextStyle(color: Colors.grey), maxLines: 1),
+                _buildCardBio(user.bio),
               ],
             ),
           ),
