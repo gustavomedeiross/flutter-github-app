@@ -205,15 +205,20 @@ class _HomeState extends State<Home> {
                   _setUsersOnSharedPreferences(users);
                 },
                 builder: (BuildContext context, List incoming, List rejected) {
+
+                  if (incoming.isNotEmpty) {
+                    HapticFeedback.lightImpact();
+                  }
+
                   return AnimatedContainer(
                     duration: Duration(milliseconds: 300),
-                    width: incoming.isEmpty ? 60 : 90,
-                    height: incoming.isEmpty ? 60 : 90,
-                    child: Icon(Icons.delete, color: Colors.grey),
+                    width: incoming.isEmpty ? 60 : 100,
+                    height: incoming.isEmpty ? 60 : 100,
+                    child: Icon(Icons.delete, color: Colors.red),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: Colors.red),
                     ),
                   );
                 },
