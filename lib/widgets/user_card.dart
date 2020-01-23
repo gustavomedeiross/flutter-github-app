@@ -10,13 +10,26 @@ class UserCard extends StatelessWidget {
 
   UserCard({@required this.user, this.handleDragStarted, this.handleDragEnd});
 
-  Widget _buildUserBio(String bio) {
-    final bool bioExists = bio != null && bio.length > 0;
+  Widget _buildUserName(String name) {
+    final bool nameIsSet = name != null && name.length > 0;
     return Text(
-      bioExists ? bio : 'Bio not provided',
+      nameIsSet ? name : 'Name not provided',
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontStyle: nameIsSet ? FontStyle.normal : FontStyle.italic,
+      ),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  Widget _buildUserBio(String bio) {
+    final bool bioIsSet = bio != null && bio.length > 0;
+    return Text(
+      bioIsSet ? bio : 'Bio not provided',
       style: TextStyle(
         color: Colors.grey,
-        fontStyle: bioExists ? FontStyle.normal : FontStyle.italic,
+        fontStyle: bioIsSet ? FontStyle.normal : FontStyle.italic,
       ),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
@@ -63,7 +76,7 @@ class UserCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Text(user.name, style: TextStyle(fontWeight: FontWeight.bold)),
+                _buildUserName(user.name),
                 _buildUserBio(user.bio)
               ],
             ),

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:io';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'dart:async';
+import 'dart:io';
 
 import '../models/user.dart';
 import '../widgets/user_card.dart';
 import '../exceptions/app_exception.dart';
+import '../repositories/fetch_user.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -23,7 +22,10 @@ class _HomeState extends State<Home> {
   List usersBeingDragged = [];
   final inputController = TextEditingController();
 
-  void _submit() async {
+
+  void _handleSubmit() async {
+    FocusScope.of(context).requestFocus(FocusNode());
+
     setState(() {
       this.loading = true;
     });
@@ -103,18 +105,50 @@ class _HomeState extends State<Home> {
     HapticFeedback.lightImpact();
   }
 
-  Future<User> fetchUser(String user) async {
-      final http.Response response = await http.get('https://api.github.com/users/$user');
+  Widget _buildUsernameInput() {
+    return TextFormField(
+      onFieldSubmitted: (_) => _handleSubmit(),
+      onChanged: (username) {
+        if (error.length > 0)
+          setState(() => error = '');
+      },
+      controller: inputController,
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+        filled: true,
+        errorText: error.length > 0 ? error : null,
+        labelText: 'Username',
+        helperText: ' ',
+        suffixIcon: _buildUsernameInputSuffixIcon(),
+      ),
+    );
+  }
 
-      if (response.statusCode == 404) {
-        throw HttpException('User not Found');
-      }
+  Widget _buildUsernameInputSuffixIcon() {
+    if (loading) {
+      return Container(
+        width: 20,
+        height: 20,
+        padding: EdgeInsets.all(10),
+        child: CircularProgressIndicator(strokeWidth: 2),
+      );
+    }
 
-      if (response.statusCode != 200) {
-        throw HttpException('Error. Try Again Later');
-      }
+    if (error.length > 0) {
+      return IconButton(
+          icon: Icon(Icons.cancel),
+          color: Colors.red,
+          onPressed: () {
+            setState(() => error = '');
+            inputController.clear();
+          },
+      );
+    }
 
-      return User.fromJson(json.decode(response.body));
+    return IconButton(
+      icon: Icon(Icons.add),
+      onPressed: _handleSubmit,
+    );
   }
 
   @override
@@ -131,49 +165,7 @@ class _HomeState extends State<Home> {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(bottom: 25),
-                  child: TextFormField(
-                    onChanged: (username) {
-                      if (error.length > 0)
-                        setState(() => error = '');
-                    },
-                    controller: inputController,
-                    textInputAction: TextInputAction.done,
-                    onFieldSubmitted: (username) {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      _submit();
-                    },
-                    decoration: InputDecoration(
-                        filled: true,
-                        errorText: error.length > 0 ? error : null,
-                        labelText: 'Username',
-                        helperText: ' ',
-                        suffixIcon: loading ? (
-                            Container(
-                              width: 20,
-                              height: 20,
-                              padding: EdgeInsets.all(10),
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            )
-                        ) : (
-                            error.length > 0 ? (
-                                IconButton(
-                                  icon: Icon(Icons.cancel),
-                                  color: Colors.red,
-                                  onPressed: () {
-                                    setState(() => error = '');
-                                    inputController.clear();
-                                  },
-                                )
-                            ) : IconButton(
-                              icon: Icon(Icons.add),
-                              onPressed: () {
-                                FocusScope.of(context).requestFocus(FocusNode());
-                                _submit();
-                              },
-                            )
-                        )
-                    ),
-                  ),
+                  child: _buildUsernameInput(),
                 ),
                 Expanded(
                   child: Container(

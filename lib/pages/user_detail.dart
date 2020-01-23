@@ -26,6 +26,20 @@ class _UserDetailState extends State<UserDetail> {
     user = widget.user;
   }
 
+  Widget _buildUserName(String name) {
+    final bool nameIsSet = name != null && name.length > 0;
+    return Text(
+      nameIsSet ? name : 'Name not provided',
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 18,
+        fontStyle: nameIsSet ? FontStyle.normal : FontStyle.italic,
+      ),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
   Widget _buildUserBio(String bio) {
     final bool bioExists = bio != null && bio.length > 0;
     return Text(
@@ -43,7 +57,7 @@ class _UserDetailState extends State<UserDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(user.name),
+        title: Text(user.name ?? user.login),
       ),
       body: Container(
         padding: EdgeInsets.all(25),
@@ -66,7 +80,7 @@ class _UserDetailState extends State<UserDetail> {
                       )
                   ),
                   Container(
-                    child: Text(user.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                    child: _buildUserName(user.name)
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 5),

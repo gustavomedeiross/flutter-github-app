@@ -1,1 +1,1 @@
-const api = 'http://192.168.2.102:3000';
+const api = 'https://api.github.com';
