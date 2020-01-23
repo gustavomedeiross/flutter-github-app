@@ -188,7 +188,7 @@ class _HomeState extends State<Home> {
             AnimatedPositioned(
               duration: Duration(milliseconds: 500),
               curve: Curves.easeInOutBack,
-              bottom: usersBeingDragged.isEmpty ? -60 : 30,
+              bottom: usersBeingDragged.isEmpty ? -100 : 30,
               left: 0,
               right: 0,
               child: DragTarget<User>(
@@ -202,15 +202,20 @@ class _HomeState extends State<Home> {
                     HapticFeedback.lightImpact();
                   }
 
-                  return AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
-                    width: incoming.isEmpty ? 60 : 100,
-                    height: incoming.isEmpty ? 60 : 100,
-                    child: Icon(Icons.delete, color: Colors.red),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.red),
+                  return Container(
+                    width: 100,
+                    height: 100,
+                    alignment: Alignment.center,
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: 300),
+                      width: incoming.isEmpty ? 60 : 100,
+                      height: incoming.isEmpty ? 60 : 100,
+                      child: Icon(Icons.delete, color: Colors.red),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.red),
+                      ),
                     ),
                   );
                 },
