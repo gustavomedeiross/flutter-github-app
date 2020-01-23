@@ -26,6 +26,19 @@ class _UserDetailState extends State<UserDetail> {
     user = widget.user;
   }
 
+  Widget _buildUserBio(String bio) {
+    final bool bioExists = bio != null && bio.length > 0;
+    return Text(
+      bioExists ? bio : 'Bio not provided',
+      style: TextStyle(
+        fontSize: 14,
+        color: Colors.grey,
+        fontStyle: bioExists ? FontStyle.normal : FontStyle.italic,
+      ),
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +70,7 @@ class _UserDetailState extends State<UserDetail> {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 5),
-                    child: Text(user.bio, style: TextStyle(fontSize: 14, color: Colors.grey)),
+                    child: _buildUserBio(user.bio),
                   )
                 ],
               ),

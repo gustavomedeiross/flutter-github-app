@@ -32,7 +32,7 @@ class _StarListState extends State<StarList> {
       setState(() => page++);
       final lastStars = await _fetchMoreStars();
 
-      if (lastStars.length == 0) {
+      if (lastStars.length < 20) {
         _scrollController.removeListener(handleInfiniteScroll);
       }
     }

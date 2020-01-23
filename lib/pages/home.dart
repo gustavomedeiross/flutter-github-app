@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:github_viewer/pages/user_detail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'dart:async';
 
 import '../models/user.dart';
+import '../widgets/user_card.dart';
 import '../exceptions/app_exception.dart';
 
 class Home extends StatefulWidget {
@@ -230,72 +230,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-
-class UserCard extends StatelessWidget {
-  final User user;
-  final Function handleDragStarted;
-  final Function handleDragEnd;
-
-  UserCard({@required this.user, this.handleDragStarted, this.handleDragEnd});
-
-  Widget _buildCardBio(String bio) {
-    if (bio != null && bio.length > 0) {
-      return Text(bio, style: TextStyle(color: Colors.grey), maxLines: 1);
-    }
-
-    return Text('Bio not provided', style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic), maxLines: 1);
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Card(
-        child: InkWell(
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => UserDetail(user: user))
-            );
-          },
-          child: Container(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              children: <Widget>[
-                LongPressDraggable<User>(
-                  data: user,
-                  onDragStarted: () => handleDragStarted(user),
-                  onDragEnd: (_) => handleDragEnd(user),
-                  feedback: Container(
-                    width: 75,
-                    height: 75,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                        image: DecorationImage(
-                          image: NetworkImage(user.avatarUrl),
-                        )
-                    ),
-                  ),
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    margin: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(user.avatarUrl)
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                    ),
-                  ),
-                ),
-                Text(user.name, style: TextStyle(fontWeight: FontWeight.bold)),
-                _buildCardBio(user.bio),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
