@@ -1,16 +1,12 @@
-# github_viewer
+# Flutter GitHub App
 
-A new Flutter project.
+A simple GitHub app made with Flutter for learning purposes.
 
-## Getting Started
+## Navigation
 
-This project is a starting point for a Flutter application.
+On the app, you can store any GitHub user you want and see his starred repositories.
+If you want to remove the user from the listing, you can long press his user avatar and drop it on the thrash icon.
 
-A few resources to get you started if this is your first Flutter project:
+If you want to try it out, clone the project on your machine and run `flutter run` (you need to have the Flutter SDK installed, as well a mobile device or emulator to run it).
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Feel free to contribute to the project or give me any tips on Flutter!
